@@ -1,6 +1,6 @@
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
-import { Account } from '../models/account.model';
-import { Setting } from '../models/setting.model';
+import { Account } from './models/account.model';
+import { Setting } from './models/setting.model';
 
 const env = process.env.NODE_ENV || 'development';
 

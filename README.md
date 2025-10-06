@@ -57,6 +57,167 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## API Testing
+
+### Account Endpoints
+
+#### Create an account
+```bash
+curl -X POST http://localhost:3000/accounts \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TestAccount"
+  }'
+```
+
+### Settings Endpoints (require Basic Auth)
+
+#### Create a setting - STRING type
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "app_name",
+    "dataType": "string",
+    "value": "My Application",
+    "accountId": 1
+  }'
+```
+
+#### Create a setting - NUMBER type
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "max_users",
+    "dataType": "number",
+    "value": "100",
+    "accountId": 1
+  }'
+```
+
+#### Create a setting - BOOLEAN type
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "is_active",
+    "dataType": "boolean",
+    "value": "true",
+    "accountId": 1
+  }'
+```
+
+#### Create a setting - JSON type
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "config",
+    "dataType": "json",
+    "value": "{\"theme\": \"dark\", \"language\": \"en\"}",
+    "accountId": 1
+  }'
+```
+
+#### Update a setting
+```bash
+curl -X PATCH http://localhost:3000/settings/1 \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "value": "Updated Application Name"
+  }'
+```
+
+#### Update multiple fields of a setting
+```bash
+curl -X PATCH http://localhost:3000/settings/1 \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "updated_name",
+    "value": "Updated Value",
+    "dataType": "string"
+  }'
+```
+
+#### Delete a setting (soft delete)
+```bash
+curl -X DELETE http://localhost:3000/settings/1 \
+  -u admin:password
+```
+
+### Error Scenarios (for testing validation)
+
+#### Invalid dataType value
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "test",
+    "dataType": "invalid_type",
+    "value": "test",
+    "accountId": 1
+  }'
+```
+
+#### Invalid number value
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "test_number",
+    "dataType": "number",
+    "value": "not_a_number",
+    "accountId": 1
+  }'
+```
+
+#### Invalid boolean value
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "test_bool",
+    "dataType": "boolean",
+    "value": "yes",
+    "accountId": 1
+  }'
+```
+
+#### Invalid JSON value
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -u admin:password \
+  -d '{
+    "name": "test_json",
+    "dataType": "json",
+    "value": "{invalid json}",
+    "accountId": 1
+  }'
+```
+
+#### Missing authentication
+```bash
+curl -X POST http://localhost:3000/settings \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "test",
+    "dataType": "string",
+    "value": "test",
+    "accountId": 1
+  }'
+```
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.

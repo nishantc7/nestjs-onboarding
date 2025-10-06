@@ -1,5 +1,5 @@
 import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
-import { DataTypeEnum } from '../../database/models/setting.model';
+import { DataTypeEnum } from '../../common/constants/data-types.constant';
 import { CreateSettingDto, UpdateSettingDto } from '../dto/setting.dto';
 
 @Injectable()

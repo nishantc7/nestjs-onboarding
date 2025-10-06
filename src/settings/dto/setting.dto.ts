@@ -1,5 +1,11 @@
-import { IsString, IsEnum, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
-import { DataTypeEnum } from '../../database/models/setting.model';
+import {
+  IsString,
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+} from 'class-validator';
+import { DataTypeEnum } from '../../common/constants/data-types.constant';
 
 export class CreateSettingDto {
   @IsString()

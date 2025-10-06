@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AccountController } from './account.controller';
 import { AccountService } from './account.service';
-import { Account } from '../database/models/account.model';
+import { Account } from './models/account.model';
 
 @Module({
   imports: [SequelizeModule.forFeature([Account])],

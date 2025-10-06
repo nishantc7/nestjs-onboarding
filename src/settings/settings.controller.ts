@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { SettingsService } from './settings.service';
 import { CreateSettingDto, UpdateSettingDto } from './dto/setting.dto';
-import { Setting } from '../database/models/setting.model';
+import { Setting } from './models/setting.model';
 import { ValidateSettingPipe } from './pipes/validate-setting.pipe';
 import { BasicAuthGuard } from '../auth/guards/basic-auth.guard';
 

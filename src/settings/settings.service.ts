@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Setting } from '../database/models/setting.model';
+import { Setting } from './models/setting.model';
 import { CreateSettingDto, UpdateSettingDto } from './dto/setting.dto';
 
 @Injectable()

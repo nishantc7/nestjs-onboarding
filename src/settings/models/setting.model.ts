@@ -1,4 +1,4 @@
-import * as sequelize from 'sequelize';
+import type { NonAttribute } from 'sequelize';
 import {
   Table,
   Column,
@@ -10,14 +10,8 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Account } from './account.model';
-
-export enum DataTypeEnum {
-  STRING = 'string',
-  NUMBER = 'number',
-  BOOLEAN = 'boolean',
-  JSON = 'json',
-}
+import { Account } from '../../account/models/account.model';
+import { DataTypeEnum } from '../../common/constants/data-types.constant';
 
 @Table({
   tableName: 'settings',
@@ -35,21 +29,21 @@ export class Setting extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  name: string;
+  declare name: string;
 
   @AllowNull(false)
-  @Column(DataType.ENUM('string', 'number', 'boolean', 'json'))
-  data_type: DataTypeEnum;
+  @Column(DataType.ENUM({ values: Object.values(DataTypeEnum) }))
+  declare data_type: DataTypeEnum;
 
   @AllowNull(false)
   @ForeignKey(() => Account)
   @Column(DataType.INTEGER)
-  account_id: number;
+  declare account_id: number;
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  value: string;
+  declare value: string;
 
   @BelongsTo(() => Account)
-  account: sequelize.NonAttribute<Account>;
+  declare account: NonAttribute<Account>;
 }

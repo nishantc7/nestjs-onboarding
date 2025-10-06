@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Account } from '../database/models/account.model';
+import { Account } from './models/account.model';
 import { CreateAccountDto } from './dto/account.dto';
 
 @Injectable()

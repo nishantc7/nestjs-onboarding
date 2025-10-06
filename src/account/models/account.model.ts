@@ -1,4 +1,4 @@
-import * as sequelize from 'sequelize';
+import type { NonAttribute } from 'sequelize';
 import {
   Table,
   Column,
@@ -9,7 +9,7 @@ import {
   DataType,
   HasMany,
 } from 'sequelize-typescript';
-import { Setting } from './setting.model';
+import { Setting } from '../../settings/models/setting.model';
 
 @Table({
   tableName: 'accounts',
@@ -26,8 +26,8 @@ export class Account extends Model {
 
   @AllowNull(false)
   @Column(DataType.STRING)
-  name: string;
+  declare name: string;
 
   @HasMany(() => Setting, { foreignKey: 'account_id', as: 'settings' })
-  settings: sequelize.NonAttribute<Setting[]>;
+  declare settings: NonAttribute<Setting[]>;
 }
